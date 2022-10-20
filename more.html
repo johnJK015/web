@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--,宽度为屏幕宽度，初始的缩放比例为1.0-->
+    <title>自我介绍</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: url(img/12.jpg) ;
+            background-size: cover;<!--把背景图片放大到适合元素容器的尺寸，图片比例不变-->
+        }
+
+        .box {
+            width: 1200px;
+            height: 540px;
+            background: rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
+            text-align: center;
+            margin-top: 7%;
+
+        }
+
+        .box .left a {
+            display: block;
+            width: 200px;
+            height: 90px;
+            background: rgba(0, 0, 0, 0.2);
+            font-size: 20px;
+            color: #fff;
+            text-decoration: none;
+            padding-left: 30px;
+            line-height: 90px;
+        }
+
+        .box .left a:hover {
+            background-color: #ff6700;
+        }
+
+        .left {
+            float: left;
+            width: 230px;
+            height: 540px;
+            background-color: cadetblue;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .right {
+            float: right;
+            width: 970px;
+            height: 540px;
+            background-color: rgba(152, 233, 233, 0.2);
+            ;
+
+        }
+
+        .right>div {
+            float: left;
+            width: 470px;
+            height: 540px;
+            background: rgba(0, 0, 0, 0.2);
+            margin-left: 14px;
+            margin-bottom: 14px;
+        }
+
+        .right .one {
+            background-color: rgb(152, 233, 233, 0.2);
+        }
+
+        
+        
+        .right .photo {
+            width: 490px;
+            height: 540px;
+        }
+
+        .right .one h1 {
+            color: white;
+            font-size: 60px;
+        }
+
+        .right .one p {
+            font-size: 40px;
+            font-weight: 500;
+            color: rgb(148, 241, 248);
+            font-style: italic;
+        } 
+         img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+           
+        } 
+         #pic{width:1200px; height:540px; margin:0 auto;}
+         #pic ul{margin-top:10px;text-align:center;}
+	   #pic .item,#pic .active{width:9px;height:9px;cursor: pointer;
+		 border-radius:10px;margin:1px 1px 1px 8px;}
+	   #pic .item {background:#FFF;}
+	   #pic .active {background: #F60;}
+      ul{margun:0;padding:0}
+      li{display:line-block;}
+    </style>
+        
+       <script>
+	window.onload = function(){
+		var oDiv = document.getElementById('pic');// 得到最外层容器
+		var oImg = oDiv.getElementsByTagName('img')[0];// 得到图片
+		var oUl = oDiv.getElementsByTagName('ul')[0];// 得到ul
+		var arrUrl = ['img/17_4k.jpg','img/16_4k.jpg','img/13_4k.jpg','img/11_4k.jpg'];
+		var aLi = oDiv.getElementsByTagName('li');
+		var num = 0;
+		// 表示当前的下标--->图片和按钮
+		var timer = null;//定时器
+		
+		//生成对应图片个数的列表项  按钮
+		for(var i = 0; i < arrUrl.length; i++){
+		    oUl.innerHTML += "<li class = 'item'></li>";
+		}
+	 
+		//初始化
+		function fnTab(){
+		   oImg.src = arrUrl[num];
+		   for(var i = 0; i < aLi.length; i++){
+			 aLi[i].className = 'item';
+			 //首先全部清空活动状态
+		   }
+		   aLi[num].className = 'item active';//然后设置当前li为活动状态
+		}
+		
+		fnTab();//调用函数实现初始化设置	
+		
+		// 实现点击哪个按钮，就显示哪张图片功能
+		for(var j = 0; j < aLi.length; j++){
+			aLi[j].index = j;//为每个列表项自定义索引属性，属性值和数组下标一一对应
+			aLi[j].onclick = function(){ 
+				num = this.index;//将当前li的索引属性值赋给变量num
+			fnTab();
+			};
+		}
+		// 自动播放
+		function autoPlay(){		//使用定时器实现每隔2秒自动切换图片
+		  timer = setInterval(function(){
+			num++;
+			num %= arrUrl.length;  // 防止下标溢出
+			fnTab();
+			},2000);
+		}
+		
+		autoPlay();//调用自动切换图片函数
+	
+		oImg.onmouseover = function(){//鼠标移到图片上停止图片切换
+			clearInterval(timer);	
+		}
+		oImg.onmouseout = autoPlay;//鼠标移开图片后继续自动切换图片，注意这里是没有括号的噢
+	};
+</script>
+</head>
+
+<body>
+<!-- 设置背景音乐 -->
+    <audio autoplay="autoplay" loop="loop" preload="auto" src="music/">
+    </audio>
+    <div class="nav">
+        <a href="#">首页</a>
+        <a href="#ge" >个人简介</a>
+        <a href="#ge">人生格言</a>
+        <a href="#xing" >兴趣爱好</a>
+        <a href="#wei">未来规划</a>
+        <a href="#tu" >图片集</a>
+    </div>
+    <div class="box">
+        <div class="left">
+            <a href="#" name="top">首页</a >
+            <a href="#ge">个人简介</a >
+            <a href="#ren">人生格言</a >
+            <a href="#xing">兴趣爱好</a >
+            <a href="#wei">未来规划</a >
+            <a href="#tu">图片集</a >
+        </div>
+        <div class="right">
+            <div class="one">
+                <h1><i>Hello Evenbody</i></h1>
+                <p>我叫魏陈，</p>
+                <p>我来自计科203班</p>
+            </div>
+            <div>
+                <img src="img/112.jpg" alt="背景图" class="photo">
+            </div>
+        </div>
+    </div>
+    
+
+         
+      <div class="box">
+        <div class="left">
+            <a href="#top" >返回首页</a >
+            <a href="#"  name="top"><b>个人简介</b></a >
+            <a href"#ren" >人生格言</a >
+            <a href="#xing" >兴趣爱好</a >
+            <a href="#wei" >未来规划</a >
+            <a href="#tu" >图片集</a >
+        </div>
+        <div class="right">
+              <div> <h2>大家好，我叫魏陈，我是来自计科203班的一名学生。<p>
+                  学号：20101080315<p>
+              手机号：18381088618<p>
+              QQ：2335863950<p></h2>
+              </div>
+
+            <div>
+                <img src="img/112.jpg" alt="背景图" class="photo">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box">
+        <div class="left">
+            <a href="#top" >返回首页</a >
+            <a href="#ge">个人简介</a >
+            <a href"#" name="ren">人生格言</a >
+            <a href="#xing">兴趣爱好</a >
+            <a href="#wei" >未来规划</a >
+            <a href="#tu" >图片集</a >
+        </div>
+        <div class="right">
+            <div >
+              <h3>不登高山，不知山之高。不临险境，不知境之险。<p>
+          站的高，方能看得远。希望越大，风险也越大。<p>
+        生的路每个人都要走一趟，向高处去，向险处行，<p>
+    一定能够看到最美的风景。<p>  <p>
+            永远相信只要永不放弃，我们还是有机会的。<p>
+          最后，我们还是坚信一点，这世界上只要有梦想，<p>
+       只要不断努力，只要不断学习，就会取得成功。<p>
+
+  机会只对进取有为的人开放，庸人永远无法光顾。<p></h3>
+
+            </div>
+            <div>
+                <img src="img/112.jpg" alt="背景图" class="photo">
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="left">
+            <a href="#top" >返回首页</a >
+            <a href="#ge">个人简介</a >
+            <a href"#ren">人生格言</a >
+            <a href="#" name="xing">兴趣爱好</a >
+            <a href="#wei" >未来规划</a >
+            <a href="#tu" >图片集</a >
+        </div>
+        <div class="right">
+            <div >
+              <h2>  排球，乒乓球，羽毛球，WBE前端 ，H5<p>       
+     平时没事喜欢看一些关于H5,JavaScript的书籍，<p>
+     由于有一定的html基础与变成经验，所以对于<p>
+     html有一些兴趣。<p>
+            </div>
+            <div>
+                <img src="img/112.jpg" alt="背景图" class="photo">
+            </div>
+        </div>
+    </div>
+
+
+   <div class="box">
+        <div class="left">
+            <a href="#top" >返回首页</a >
+            <a href="#ge">个人简介</a >
+            <a href"#ren">人生格言</a >
+            <a href="#xing">兴趣爱好</a >
+            <a href="#" name="wei">未来规划</a >
+            <a href="#tu" >图片集</a >
+        </div>
+        <div class="right">
+            <div >
+               <h3>我是一个很平凡的本科生，但我并不甘于平凡。作为家里的孩子，出人头地当然是全家寄予我的希望，
+所以，自我踏进大学校门的那一刻起，我便决定，要向更高的地方前行。<p>
+　　&nbsp;&nbsp;我比较喜欢HTML和前端等这一类，未来应该会向这两个方面发展。当然,在这之前，
+我必须要历经一一个崭新的开始，那就是考研。在大学本科的四年里，首先要认真学好专业的知识，
+努力通过专四的考试，顺利的毕业,拿到学士学位。
+            </div>
+            <div>
+                <img src="img/112.jpg" alt="背景图" class="photo">
+            </div>
+        </div>
+    </div>
+    
+   
+        <div id="pic" > 
+       
+             <a href="#" name="tu"><img src=""/>
+           <ul>
+         </ul>
+      </div>
+    
+</body>
+
+</html>
